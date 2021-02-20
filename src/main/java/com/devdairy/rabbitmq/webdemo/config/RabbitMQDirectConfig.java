@@ -29,30 +29,37 @@ public class RabbitMQDirectConfig {
     Queue adminQueue() {
         return new Queue("AdminQueue", false);
     }
-
     @Bean
-    DirectExchange exchange() {
-        return new DirectExchange("direct-exchange");
+    Queue allQueue() {
+        return new Queue("allQueue", false);
+    }
+    @Bean
+    TopicExchange exchange() {
+        return new TopicExchange("topic-exchange");
     }
 
     @Bean
-    Binding logsBinding(Queue logs, DirectExchange exchange) {
+    Binding logsBinding(Queue logs, TopicExchange exchange) {
         System.out.println("logs Binding");
         return BindingBuilder.bind(logs).to(exchange).with("logs");
     }
 
     @Bean
-    Binding transactionsBinding(Queue tranQueue, DirectExchange exchange) {
+    Binding transactionsBinding(Queue tranQueue, TopicExchange exchange) {
         System.out.println("transactions Binding");
         return BindingBuilder.bind(tranQueue).to(exchange).with("transactions");
     }
 
     @Bean
-    Binding adminBinding(Queue admin, DirectExchange exchange) {
+    Binding adminBinding(Queue admin, TopicExchange exchange) {
         System.out.println("admin Binding");
         return BindingBuilder.bind(admin).to(exchange).with("admin");
     }
-
+    @Bean
+    Binding allBinding(Queue all, TopicExchange exchange) {
+        System.out.println("all Binding");
+        return BindingBuilder.bind(all).to(exchange).with("*");
+    }
     @Bean
     public MessageConverter jsonMessageConverter() {
         return new Jackson2JsonMessageConverter();
