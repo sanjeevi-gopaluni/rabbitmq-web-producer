@@ -31,7 +31,7 @@ public class RabbitMQDirectConfig {
     }
     @Bean
     Queue allQueue() {
-        return new Queue("allQueue", false);
+        return new Queue("allQueue", true);
     }
     @Bean
     TopicExchange exchange() {
