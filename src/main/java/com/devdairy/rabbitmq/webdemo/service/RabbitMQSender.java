@@ -20,9 +20,9 @@ public class RabbitMQSender {
         System.out.println("Send msg=" + transaction);
     }
 
-    public void sendWithCustomParams(String exchangeParam,String routingKeyParam,Transaction transaction) {
-        rabbitTemplate.convertAndSend(exchangeParam, routingKeyParam, transaction);
-        System.out.println("Send msg=" + transaction+"\twith params"+exchangeParam+","+routingKeyParam);
+    public void sendWithCustomParams(String exchangeParam,Transaction transaction) {
+        rabbitTemplate.convertAndSend(exchangeParam, "", transaction);
+        System.out.println("Send msg=" + transaction+"\twith params"+exchangeParam);
     }
 
 }

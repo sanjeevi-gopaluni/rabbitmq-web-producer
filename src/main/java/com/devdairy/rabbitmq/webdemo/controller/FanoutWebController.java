@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/direct")
-public class DirectWebController {
+@RequestMapping("/fanout")
+public class FanoutWebController {
     @Autowired
     RabbitMQSender sender;
 
@@ -21,12 +21,12 @@ public class DirectWebController {
         return "Message sent to the Rabbit Mq";
     }
     @GetMapping(value="/transaction")
-    public String produceTransactionGet(@RequestParam("exchange") String exchange,@RequestParam("routingKey") String routingKey,@RequestParam("id") String id,@RequestParam("amt") Double amt,@RequestParam("type") String type ){
+    public String produceTransactionGet(@RequestParam("exchange") String exchange,@RequestParam("id") String id,@RequestParam("amt") Double amt,@RequestParam("type") String type ){
         Transaction t = new Transaction();
         t.setTransId(id);
         t.setAmt(amt);
         t.setType(type);
-        sender.sendWithCustomParams(exchange,routingKey,t);
+        sender.sendWithCustomParams(exchange,t);
         return "GET Message sent to the Rabbit Mq";
     }
 }
