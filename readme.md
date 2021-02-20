@@ -5,3 +5,5 @@ Steps To execute this
 > start rabbitmq server
 > fire the localhost:8080/transaction api with transaction object like
 > http://localhost:8080/transaction?id=12345&amt=102&type=dr 
+
+### RabbitMq Consumer repo link [RabbitMq Consumer repo link](https://github.com/sanjeevi-gopaluni/rabbitmq-consumer) 
